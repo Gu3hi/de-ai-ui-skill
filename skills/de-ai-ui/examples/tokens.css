@@ -1,0 +1,75 @@
+/* de-ai-ui · 最小 token 集（示例）
+   原则：灰阶打底、颜色留给内容；字号 <=4 档；4px 网格；圆角按 r = R - p 逐层推。
+   色阶数值为占位示例，正式项目请换成成套色阶（如 Radix Colors）对应等级。 */
+
+:root {
+  /* ---- 灰阶（界面 chrome 只用这些） ---- */
+  --gray-1: #fcfcfc;   /* 应用背景 */
+  --gray-2: #f5f5f4;   /* 基础底色（示例：带一点暖意的灰） */
+  --gray-3: #eeeeec;   /* 组件背景 */
+  --gray-4: #e4e4e1;   /* 悬停背景 */
+  --gray-6: #d6d6d2;   /* 分隔 / 弱边框 */
+  --gray-7: #c2c2bd;   /* 组件边框 */
+  --gray-11: #6f6f6a;  /* 次要文字 */
+  --gray-12: #1d1d1b;  /* 主要文字 */
+
+  /* ---- 基础色：只定 3-5 个，其余从色阶派生 ---- */
+  --brand-9: #3e63dd;  /* 唯一的主操作色（示例） */
+
+  /* ---- 字号：3-4 档，最小 12px ---- */
+  --text-sm: 12px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 24px;
+
+  /* ---- 字体栈：先西后中，sans-serif 兜底 ---- */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Helvetica, Arial,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei",
+    "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans CN",
+    sans-serif;
+  --font-mono:
+    "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* ---- 圆角：只定最外层，内层按 r = R - p 计算 ---- */
+  --radius-dialog: 32px;
+  --radius-panel: 16px;  /* dialog 32 - padding 16 */
+  --radius-chip: 8px;    /* panel 16 - padding 8 */
+  --radius-min: 4px;
+
+  /* ---- 间距：4px 网格 ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ---- 边框与动效基线 ---- */
+  --hairline: 0.5px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-base: 250ms;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  color: var(--gray-12);
+  background: var(--gray-1);
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+}
+
+/* 连续圆角：渐进增强，不支持的浏览器回退普通 border-radius */
+@supports (corner-shape: superellipse(1.25)) {
+  .card, .dialog, .panel {
+    corner-shape: superellipse(1.25);
+  }
+  .pill, .circle {
+    corner-shape: round;
+  }
+}

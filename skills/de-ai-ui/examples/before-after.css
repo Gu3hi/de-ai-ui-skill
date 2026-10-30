@@ -1,0 +1,44 @@
+/* de-ai-ui · before / after 对照（示例）
+   左边是典型 AI slop 写法，右边是按本 Skill 规则修正后的写法。 */
+
+/* ❌ Before: 紫色渐变按钮、随手 hex、1px 粗边框、卡片左彩色竖线、字号乱飞 */
+.card-before {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #8b5cf6;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(139, 92, 246, 0.25);
+  padding: 18px;
+}
+.card-before .title { font-size: 21px; text-transform: uppercase; letter-spacing: 0.08em; }
+.card-before .desc  { font-size: 11px; color: #9a7bff; }
+.card-before button {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  border-radius: 9px; /* 与外层 12px、padding 18px 不成 r = R - p */
+  color: #fff;
+}
+
+/* ✅ After: 黑白灰 chrome、0.5px 统一细线、同心圆角、无左彩线、字号收敛 */
+.card-after {
+  background: var(--gray-1);
+  border: var(--hairline) solid var(--gray-6);
+  border-radius: var(--radius-panel); /* 16px */
+  padding: var(--space-4);            /* 16px，落在 4px 网格 */
+}
+.card-after .title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--gray-12);
+}
+.card-after .desc {
+  font-size: var(--text-sm); /* 12px，全站最小档 */
+  color: var(--gray-11);     /* 层级靠颜色区分，不再加字号 */
+}
+.card-after button {
+  /* 按钮与卡片不贴边嵌套时不套用 r = R - p；它单独用 chip 档圆角 8px，与内层 panel（16px、padding 8px）里 chip 的算法一致。 */
+  border-radius: var(--radius-chip);
+  background: var(--gray-12);
+  color: var(--gray-1);
+  border: var(--hairline) solid var(--gray-12);
+  transition: background var(--duration-base) var(--ease-out);
+}
